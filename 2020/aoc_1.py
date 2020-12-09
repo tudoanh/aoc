@@ -1,6 +1,5 @@
 from utils import *
 
-test = TestInput(1, int)
 inp = Input(1, int)
 
 for a, b in combinations(inp, 2):  # Part 1
