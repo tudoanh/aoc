@@ -1,3 +1,4 @@
+import math
 from utils import *
 
 
@@ -9,34 +10,26 @@ threes = 0
 new_inp = sorted(set(inp + (0, max(inp) + 3)))
 
 # Part 1
-# for i in new_inp:
-#     if i + 1 in new_inp:
-#         ones += 1
-#     elif i + 3 in new_inp:
-#         threes += 1
-#
-# print(ones * threes)
+for i in new_inp:
+    if i + 1 in new_inp:
+        ones += 1
+    elif i + 3 in new_inp:
+        threes += 1
+
+print(ones * threes)
 
 # Part 2
 
-A = []
-B = []
+prev = 0
+s = 0
+d = 1
 
 for i in new_inp:
-    if i + 1 in new_inp:
-        A.append(i)
-    elif i + 3 in new_inp:
-        A.append(i)
-        B.append(A)
-        A = []
+    if i - prev == 1:
+        s += 1
+    else:
+        d *= (2 ** max(0, s - 1)) - max(0, s - 3)
+        s = 0
+    prev = i
 
-B[-1].append(max(inp) + 3)
-
-count = 1
-for s in B:
-    P = list(powerset(s[1:-1]))
-    print(P)
-    count *= len(P)
-
-print(count)
-print(B)
+print(d)
